@@ -1,13 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta charset="utf-8">
-    <title>Gold Miner</title>
+    <title>copper Miner</title>
+	<style> 
+		#main {
+		  width: 200px;
+		  height:40px;
+		  //border: 1px solid #000000;
+		  display: block;
+		  justify-content: center; 
+		}
+
+		#main div {
+		  width: 445px;
+		  height: 20px;
+		  display: block;
+		}
+		
+		#copperMined {
+		color: green;
+		border: 2px solide #000000;
+		justify-content:center;
+		}
+		
+		#copperMinedPerSecond {
+		color: grey;
+		border: 2px solide #000000;
+		justify-content:center;
+		}
+		
+		#bronzeMined{
+		color: green;
+		border: 2px solide #000000;
+		justify-content:center;
+		}
+		
+		#bronzeMinedPerSecond {
+		color: grey;
+		border: 2px solide #000000;
+		justify-content:center;
+		}
+</style>
   </head>
   <body>
-    <p id="goldMined">0 Gold Mined</p>
-    <button onclick="mineGold()">Mine Gold</button>
-    <button onclick="buyGoldPerClick()" id="perClickUpgrade">Upgrade Pickaxe (Currently Level 1) Cost: 10 Gold</button>
-    <script src="main.js" charset="utf-8" type="text/javascript"></script>
+  	<script>
+
+	</script>
+   <table>
+		  <tr>
+			<th>Resource</th>
+			<th>Amount</th>
+			<th> /S </th>
+		  </tr>
+		  <tr>
+			<th id="copper">Copper</th>
+			<th id="copperMined">0</th>
+			<th id="copperMinedPerSecond">0</th>
+			
+		  </tr>
+		  <tr>
+			<th id="bronze"style="display: none;">Bronze</th>
+			<th id="bronzeMined"style="display: none;">0</th>
+			<th id="bronzeMinedPerSecond">0</th>
+		  </tr>
+	</table> 
+
+    <button onclick="minecopper()">Mine copper</button>
+	<button onclick="buycopperPerClick()" id="copperperClickUpgrade">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button>
+	
+	<div id="main">
+		<div style="background-color:blue;"></div>
+	</div>
+	
+	<button onclick="save()">Save</button>
+	<button onclick="load()">Load</button>
+	<button onclick="ClearSave()">Clear Save</button>
+	<script src="main.js" charset="utf-8" type="text/javascript"></script>
+
   </body>
+
 </html>
