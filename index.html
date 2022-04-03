@@ -15,8 +15,14 @@
 
 		#main div {
 		  width: 445px;
-		  height: 20px;
+		  height: 10px;
 		  display: block;
+		}
+		
+		button {
+		color:#e0ead9;
+		background-color:#787f73;
+		padding: 10px;
 		}
 		
 		#copperMined {
@@ -42,43 +48,178 @@
 		border: 2px solide #000000;
 		justify-content:center;
 		}
+		
+		.container {
+		display: flex; /* or inline-flex */
+		}
+		
+		.flex-container {
+		  display: flex;
+		  background-color: Green;
+		  flex-direction: column;
+		  align-items: start;
+		  flex: 0 0 0;
+		  width: 600px;  
+		}
+
+		.flex-container > div {
+		  background-color: #f1f1f1;
+		  margin: 10px;
+		  padding: 10px;
+		  font-size: 30px;
+		}
+		
+		.OptionsQuick {
+			display: inline-flex;
+			align-items: end;
+		}
+		
+		#footer {
+		   position:absolute;
+		   bottom:0;
+		   width:14%;
+		   height:20px;   /* Height of the footer */
+		   padding: 20px;
+		   background:#6cf;
+		}
+		
+		#header {
+		   position:absolute;
+		   top:0;
+		   width:20%%;
+		   height:45px;   /* Height of the footer */
+		   padding: 20px;
+		   background:brown;
+		}
+		
+		#Resources {
+		    margin-top:10px //moves your table 10pixels down
+			margin-left:10px //moves your table 10pixels right
+			border-style: solid #000;
+			border-right: 1px solid #000;
+			border-left: 1px solid #000;
+			border-top: 1px solid #000;
+			border-bottom: 1px solid #000;
+			border-color: black;
+		}
+		
+		.tabcontent {
+		  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+		  display: none;
+		  padding: 20px;
+		}
+		
+		@keyframes fadeEffect {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+		
+		.tab button.active {
+		  background-color: #ccc;
+		}
+		
+		.dnone {
+			display : none;
+		}
+
+		.dblock {
+			display :block;
+		}
+		
+		.tab {
+		  overflow: hidden;
+		  border: 1px solid #ccc;
+		  background-color: grey;
+		}
+		.tab button {
+		  background-color: inherit;
+		  float: left;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 14px 16px;
+		  transition: 0.3s;
+		}
+
+		.tab button:hover {
+		  background-color: #ddd;
+		}
+		
+		button:hover {
+		  background-color: #ddd;
+		}
 </style>
   </head>
-  <body>
-  	<script>
-
-	</script>
-   <table>
-		  <tr>
-			<th>Resource</th>
-			<th>Amount</th>
-			<th> /S </th>
-		  </tr>
-		  <tr>
-			<th id="copper">Copper</th>
-			<th id="copperMined">0</th>
-			<th id="copperMinedPerSecond">0</th>
-			
-		  </tr>
-		  <tr>
-			<th id="bronze"style="display: none;">Bronze</th>
-			<th id="bronzeMined"style="display: none;">0</th>
-			<th id="bronzeMinedPerSecond">0</th>
-		  </tr>
-	</table> 
-
-    <button onclick="minecopper()">Mine copper</button>
-	<button onclick="buycopperPerClick()" id="copperperClickUpgrade">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button>
+	<body>
+	<div id="header" display="block">
 	
-	<div id="main">
-		<div style="background-color:blue;"></div>
+	<div class="tab">
+		<button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Buildings')">Buildings</button>
+		<button class="tablinks" onclick="openTab(event, 'Research')">Research</button>
+		<button class="tablinks" onclick="openTab(event, 'Religion')">Religion</button>
+		</div>
+		
+
 	</div>
 	
-	<button onclick="save()">Save</button>
-	<button onclick="load()">Load</button>
-	<button onclick="ClearSave()">Clear Save</button>
-	<script src="main.js" charset="utf-8" type="text/javascript"></script>
+	<br><br><br>
+	<div id="Buildings" class="tabcontent" id="defaultOpen"> 
+	<span style="display: inline-block" onclick="this.parentElement.style.display='none'">[x]</span>
+	<h3 style="display: inline-block">Buildings</h3>
+		
+	   <table id="Resources">
+			  <tr>
+				<th>Resource</th>
+				<th>Amount</th>
+				<th> /S </th>
+			  </tr>
+			  <tr>
+				<th id="copper">Copper</th>
+				<th id="copperMined">0</th>
+				<th id="copperMinedPerSecond">0</th>
+				
+			  </tr>
+			  <tr>
+				<th id="bronze"style="display: none;">Bronze</th>
+				<th id="bronzeMined"style="display: none;">0</th>
+				<th id="bronzeMinedPerSecond"style="display: none;">0</th>
+			  </tr>
+		</table> <br>
+		
+		 <div class="flex-container">
+		  <div><button onclick="minecopper()">Mine Copper</button>
+		  
+		  <button onclick="buycopperPerClick()" id="copperperClickUpgrade"style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button></div>
+		  
+		  <div><button onclick="minebronze()"id="minebronzebutton"style="display: none;">Mine Bronze</button>
 
-  </body>
+		  <button onclick="buybronzePerClick()" id="bronzeperClickUpgrade"style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button></div>
+		</div> 
+	
+	</div>
+		
+	<div id="Research" class="tabcontent">
+		<span  onclick="this.parentElement.style.display='none'" class="topright" style= "display: inline-block">[x]</span>
+		<h3 style="display: inline-block">Research</h3>
+		<p>Paris is the capital of France.</p> 
+	</div>
+
+	<div id="Religion" class="tabcontent">
+		<span  onclick="this.parentElement.style.display='none'" class="topright">[x]</span>
+		<h3 style="display: inline-block">Religion</h3>
+		<p>Paris is the capital of France.</p> 
+	</div>
+	
+	
+	<div id="footer">
+		<button onclick="save()"class="OptionsQuick">Save</button>
+		<button onclick="load()"class="OptionsQuick">Load</button>
+		<button onclick="ClearSave()"class="OptionsQuick">Clear Save</button>
+		<script src="main.js" charset="utf-8" type="text/javascript"></script>
+	</div>
+	<script>
+		document.getElementById("defaultOpen").click();
+	</script>
+	</body>
 
 </html>

@@ -1,18 +1,47 @@
 var gameData = {
   copper: 0,
   copperPerClick: 1,
-  copperPerClickCost: 10,
+  copperPerClickCost: 50,
   copperPerClickUpgradeNum: 0,
   bronze: 0,
   bronzePerClick: 1
 }
 
+function openTab(Event, TabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
 
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+	document.getElementById(TabName).setAttribute("style", "display: block;"); //.style.display = "block");
+	Event.currentTarget.className += " active";
+
+	//var element = document.getElementById("defaultOpen");
+	//element.classList.add("dblock");
+	//element.classList.remove("dnone");
+	} 
 
 function minecopper() {
   gameData.copper += gameData.copperPerClick
   document.getElementById("copperMined").innerHTML = gameData.copper
   document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
+}
+
+function minebronze() {
+  gameData.bronze += gameData.bronzePerClick
+  document.getElementById("bronzeMined").innerHTML = gameData.bronze
+  document.getElementById("bronzeperClickUpgrade").innerHTML = "Upgrade Bronze Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 }
 
 function buycopperPerClick() {
@@ -28,13 +57,26 @@ function buycopperPerClick() {
 }
 
 var mainGameLoop = window.setInterval(function() {
-  minecopper()
+  minecopper(); 
   document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
+  
+  if(gameData.copper >= 50){
+	  document.getElementById("copperperClickUpgrade").style.display="inline-block";
+  }
+  
   $( document ).ready(function(){
-  if (copperPerClickUpgradeNum >= 10){
-	  document.getElementById("bronze").style.display="table-cell";
-	  document.getElementById("bronzeMined").style.display="table-cell";
-	  document.getElementById("bronzePerClick").style.display="table-cell";
+  if (gameData.copperPerClickUpgradeNum >= 2){
+		minebronze();
+		$('bronze').css('display', 'table-row');
+		document.getElementById("bronze").style.display="table-row";
+		document.getElementById("bronzeMined").style.display="table-cell";
+		document.getElementById("bronzeMinedPerSecond").style.display="table-cell";
+		document.getElementById("bronzeMinedPerSecond").innerHTML = gameData.bronzePerClick
+		document.getElementById("minebronzebutton").style.display="flex inline";
+  }
+  
+  if(gameData.bronze >= 50){
+	  document.getElementById("bronzeperClickUpgrade").style.display="flex inline";
   }
   })
 }, 1000)
