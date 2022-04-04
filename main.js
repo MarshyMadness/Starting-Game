@@ -33,29 +33,31 @@ function openTab(Event, TabName) {
 	} 
 
 function minecopper() {
-  gameData.copper += gameData.copperPerClick
-  document.getElementById("copperMined").innerHTML = gameData.copper
-  document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
+	  gameData.copper += gameData.copperPerClick
+	  document.getElementById("copperMined").innerHTML = gameData.copper
+	  document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 }
 
 function minebronze() {
-  gameData.bronze += gameData.bronzePerClick
-  document.getElementById("bronzeMined").innerHTML = gameData.bronze
-  document.getElementById("bronzeperClickUpgrade").innerHTML = "Upgrade Bronze Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
+	  gameData.bronze += gameData.bronzePerClick
+	  document.getElementById("bronzeMined").innerHTML = gameData.bronze
+	  document.getElementById("bronzeperClickUpgrade").innerHTML = "Upgrade Bronze Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 }
 
-function buycopperPerClick() {
-	document.getElementById("copperMined").innerHTML = gameData.copper
-    document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
+ $( document ).ready(function(){
+		function buycopperPerClick() {
+			document.getElementById("copperMined").innerHTML = gameData.copper
+			document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 
-  if (gameData.copper >= gameData.copperPerClickCost) {
-    gameData.copper -= gameData.copperPerClickCost
-    gameData.copperPerClick += 1
-	gameData.copperPerClickUpgradeNum += 1
-    gameData.copperPerClickCost *= 2
-  }
-}
-
+		  if (gameData.copper >= gameData.copperPerClickCost) {
+			gameData.copper -= gameData.copperPerClickCost
+			gameData.copperPerClick += 1
+			gameData.copperPerClickUpgradeNum += 1
+			gameData.copperPerClickCost *= 2
+		  }
+		}
+ }
+)
 var mainGameLoop = window.setInterval(function() {
   minecopper(); 
   document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
