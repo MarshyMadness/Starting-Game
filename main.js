@@ -1,36 +1,62 @@
 var gameData = {
-  copper: 0,
-  copperPerClick: 1,
-  copperPerClickCost: 50,
-  copperPerClickUpgradeNum: 0,
-  bronze: 0,
-  bronzePerClick: 1
+	GameVersion: "v0.0.4",
+	wood: 0,
+	woodPerClick: 1,
+	woodPerClickCost: 50,
+	copper: 0,
+	copperPerClick: 1,
+	copperPerClickCost: 50,
+	copperPerClickUpgradeNum: 0,
+	bronze: 0,
+	bronzePerClick: 1,
+	bronzePerClickUpgradeNum: 0
+};
+
+$(document).ready(function() {
+    $(".ResourceButtons").click(function(){
+    });
+});
+
+$(document).ready(function() {
+    $("#People").click(function openTabs2(TabName){
+    TabName = "People";
+	openTab("People");	
+	
+	});
+});
+
+
+function openTab(TabNames) {
+	  // Declare all variables
+	  var i, tabcontent, tablinks;
+
+	  // Get all elements with class="tabcontent" and hide them
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	  }
+
+	  // Get all elements with class="tablinks" and remove the class "active"
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+
+	  // Show the current tab, and add an "active" class to the button that opened the tab
+		//document.getElementById(TabName).setAttribute("style", "display: block;"); //.style.display = "block");
+		$(TabNames).addClass('Visibleblock');
+		//document.getElementById(TabName).classList.add('active');
+		TabNames.className += " active";
+
+		//var element = document.getElementById("defaultOpen");
+		//element.classList.add("dblock");
+		//element.classList.remove("dnone");
+} 
+function cutWood() {
+	  gameData.wood += gameData.woodPerClick
+	  document.getElementById("woodCut").innerHTML = gameData.wood
+	  document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 }
-
-function openTab(Event, TabName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-	document.getElementById(TabName).setAttribute("style", "display: block;"); //.style.display = "block");
-	Event.currentTarget.className += " active";
-
-	//var element = document.getElementById("defaultOpen");
-	//element.classList.add("dblock");
-	//element.classList.remove("dnone");
-	} 
 
 function minecopper() {
 	  gameData.copper += gameData.copperPerClick
@@ -45,22 +71,22 @@ function minebronze() {
 }
 
  $( document ).ready(function(){
-		function buycopperPerClick() {
-			document.getElementById("copperMined").innerHTML = gameData.copper
-			document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
+	function buycopperPerClick() {
+		document.getElementById("copperMined").innerHTML = gameData.copper
+		document.getElementById("copperperClickUpgrade").innerHTML = "Upgrade Copper Pickaxe (Currently Level " + gameData.copperPerClick + ") Cost: " + gameData.copperPerClickCost + " copper"
 
-		  if (gameData.copper >= gameData.copperPerClickCost) {
-			gameData.copper -= gameData.copperPerClickCost
-			gameData.copperPerClick += 1
-			gameData.copperPerClickUpgradeNum += 1
-			gameData.copperPerClickCost *= 2
-		  }
-		}
- }
-)
+	  if (gameData.copper >= gameData.copperPerClickCost) {
+		gameData.copper -= gameData.copperPerClickCost
+		gameData.copperPerClick += 1
+		gameData.copperPerClickUpgradeNum += 1
+		gameData.copperPerClickCost *= 2
+	  }
+	}
+ })
 var mainGameLoop = window.setInterval(function() {
-  minecopper(); 
-  document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
+  //minecopper(); cutWood();
+  	document.getElementById("gameVersion").innerHTML = "Version " + gameData.GameVersion
+	document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
   
   if(gameData.copper >= 50){
 	  document.getElementById("copperperClickUpgrade").style.display="inline-block";

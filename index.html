@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="main.js"></script>
     <meta charset="utf-8">
-    <title>copper Miner</title>
+    <title>Incremental Game</title>
 	<style> 
 		#main {
 		  width: 200px;
 		  height:40px;
-		  //border: 1px solid #000000;
 		  display: block;
 		  justify-content: center; 
 		}
@@ -25,27 +25,27 @@
 		padding: 10px;
 		}
 		
-		#copperMined {
+		.ResourceGathered {
 		color: green;
-		border: 2px solide #000000;
+		border: 2px solid #000000;
 		justify-content:center;
 		}
 		
-		#copperMinedPerSecond {
+		.ResourcePerSecond {
 		color: grey;
-		border: 2px solide #000000;
+		border: 2px solid #000000;
 		justify-content:center;
 		}
 		
 		#bronzeMined{
 		color: green;
-		border: 2px solide #000000;
+		border: 2px solid #000000;
 		justify-content:center;
 		}
 		
 		#bronzeMinedPerSecond {
 		color: grey;
-		border: 2px solide #000000;
+		border: 2px solid #000000;
 		justify-content:center;
 		}
 		
@@ -84,22 +84,22 @@
 		}
 		
 		#header {
-		   position:absolute;
-		   top:0;
-		   width:20%%;
-		   height:45px;   /* Height of the footer */
+		   position: absolute;
+		   width:100%;
+		   height:10px;   /* Height of the footer */
 		   padding: 20px;
 		   background:brown;
+		   justify-content: space-between;
 		}
 		
 		#Resources {
-		    margin-top:10px //moves your table 10pixels down
-			margin-left:10px //moves your table 10pixels right
-			border-style: solid #000;
-			border-right: 1px solid #000;
-			border-left: 1px solid #000;
-			border-top: 1px solid #000;
-			border-bottom: 1px solid #000;
+		    margin-top:10px; 
+			margin-left:10px;
+			border-style: solid;
+			border-right: 1px solid;
+			border-left: 1px solid;
+			border-top: 1px solid;
+			border-bottom: 1px solid;
 			border-color: black;
 		}
 		
@@ -126,10 +126,23 @@
 			display :block;
 		}
 		
+		.tabHolder {
+			display: block;
+			width:20%;
+			height:45px;   /* Height of the footer */
+			padding: 20px;
+			background:brown;
+			justify-content: space-between;
+			position: absolute;
+			top: 100px;
+		}
+		
 		.tab {
 		  overflow: hidden;
 		  border: 1px solid #ccc;
 		  background-color: grey;
+		  display: inline-block;
+		  
 		}
 		.tab button {
 		  background-color: inherit;
@@ -148,22 +161,51 @@
 		button:hover {
 		  background-color: #ddd;
 		}
+		
+		#TopOfPageContainer {
+		position: relative;
+		}
+		
+		#gameVersion{
+		transform: translate(0px, -20px);
+		}
+		
+		Visibleblock{
+		display: block;
+		position:absolute;
+		middle: 0px;
+		}
+		
+		Hidden{
+		display: none;
+		}
+		
 </style>
   </head>
-	<body>
-	<div id="header" display="block">
-	
-	<div class="tab">
-		<button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Buildings')">Buildings</button>
-		<button class="tablinks" onclick="openTab(event, 'Research')">Research</button>
-		<button class="tablinks" onclick="openTab(event, 'Religion')">Religion</button>
+<body>
+
+	<div id="TopOfPageContainer">
+		<div id="header" style="display: block">
+			<div class="Version" style="display: block">
+				<p id="gameVersion"> Version </p>
+			</div>
 		</div>
 		
-
+		
+		<div class="tabHolder">
+			<div class="tab">
+				<button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Buildings')">Buildings</button>
+				<button class="tablinks" id="People">People</button>
+				<button class="tablinks" onclick="openTab(event, 'Research')">Research</button>
+				<button class="tablinks" onclick="openTab(event, 'Religion')">Religion</button>
+			</div>
+		</div>
+	
 	</div>
 	
+	
 	<br><br><br>
-	<div id="Buildings" class="tabcontent" id="defaultOpen"> 
+	<div id="Buildings" class="tabcontent"> 
 	<span style="display: inline-block" onclick="this.parentElement.style.display='none'">[x]</span>
 	<h3 style="display: inline-block">Buildings</h3>
 		
@@ -174,52 +216,73 @@
 				<th> /S </th>
 			  </tr>
 			  <tr>
-				<th id="copper">Copper</th>
-				<th id="copperMined">0</th>
-				<th id="copperMinedPerSecond">0</th>
+				<th id="food" class="Resource">Food</th>
+				<th id="foodGathered" class="ResourceGathered">0</th>
+				<th id="foodGatheredPerSecond" class="ResourcePerSecond">0</th>
 				
 			  </tr>
 			  <tr>
-				<th id="bronze"style="display: none;">Bronze</th>
-				<th id="bronzeMined"style="display: none;">0</th>
-				<th id="bronzeMinedPerSecond"style="display: none;">0</th>
+				<th id="wood" class="Resource">Wood</th>
+				<th id="woodCut" class="ResourceGathered">0</th>
+				<th id="woodCutPerSecond" class="ResourcePerSecond">0</th>
+				
+			  </tr>
+			  <tr>
+				<th id="copper" class="Resource">Copper</th>
+				<th id="copperMined" class="ResourceGathered">0</th>
+				<th id="copperMinedPerSecond" class="ResourcePerSecond">0</th>
+				
+			  </tr>
+			  <tr>
+				<th id="bronze" style="display: none;" class="Resource">Bronze</th>
+				<th id="bronzeMined" style="display: none;">0</th>
+				<th id="bronzeMinedPerSecond" style="display: none;" class="PerSecond">0</th>
 			  </tr>
 		</table> <br>
 		
 		 <div class="flex-container">
-		  <div><button onclick="minecopper()">Mine Copper</button>
-		  
-		  <button onclick="buycopperPerClick()" id="copperperClickUpgrade"style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button></div>
-		  
-		  <div><button onclick="minebronze()"id="minebronzebutton"style="display: none;">Mine Bronze</button>
+			  <div><button class="ResourceButtons">Cut Wood</button>
+			  
+			  <button onclick="buywoodPerClick()" id="WoodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button></div>
+			  
+			  <div><button onclick="minecopper()">Mine Copper</button>
+			  
+			  <button onclick="buycopperPerClick()" id="copperperClickUpgrade" style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button></div>
+			  
+			  <div><button onclick="minebronze()" id="minebronzebutton" style="display: none;">Mine Bronze</button>
 
-		  <button onclick="buybronzePerClick()" id="bronzeperClickUpgrade"style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button></div>
+			  <button onclick="buybronzePerClick()" id="bronzeperClickUpgrade" style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button></div>
 		</div> 
 	
+	</div>
+	
+	<div id="People" class="tabcontent">
+		<span  onclick="this.parentElement.style.display='none'" class="topright" style= "display: inline-block">[x]</span>
+		<h3 style="display: inline-block">People</h3>
+		<p>Placeholder for the people.</p> 
 	</div>
 		
 	<div id="Research" class="tabcontent">
 		<span  onclick="this.parentElement.style.display='none'" class="topright" style= "display: inline-block">[x]</span>
 		<h3 style="display: inline-block">Research</h3>
-		<p>Paris is the capital of France.</p> 
+		<p>Placeholder for Research.</p> 
 	</div>
 
 	<div id="Religion" class="tabcontent">
 		<span  onclick="this.parentElement.style.display='none'" class="topright">[x]</span>
 		<h3 style="display: inline-block">Religion</h3>
-		<p>Paris is the capital of France.</p> 
+		<p>Placeholder for Religion.</p> 
 	</div>
 	
 	
 	<div id="footer">
-		<button onclick="save()"class="OptionsQuick">Save</button>
-		<button onclick="load()"class="OptionsQuick">Load</button>
-		<button onclick="ClearSave()"class="OptionsQuick">Clear Save</button>
-		<script src="main.js" charset="utf-8" type="text/javascript"></script>
+		<button onclick="save()" class="OptionsQuick">Save</button>
+		<button onclick="load()" class="OptionsQuick">Load</button>
+		<button onclick="ClearSave()" class="OptionsQuick">Clear Save</button>
 	</div>
 	<script>
-		document.getElementById("defaultOpen").click();
+
 	</script>
-	</body>
+</body>
 
 </html>
