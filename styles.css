@@ -3,19 +3,10 @@
 			padding: 0px; 
 			outline: none;
 			border: 0px;
+			overflow-y:hidden;
+			overflow-x: hidden;
 		}
-		.MainInteract{
-			position: fixed;
-			top: 53%;
-			left:50%;
-			transform: translate(-50%, -50%);
-			border-style: solid;
-			border-color: black;
-			border-width: thick;
-			text-align: center;
-			width: 41.5rem;
-			height: 40rem;
-		}
+
 		
 		#main {
 		  width: 200px;
@@ -134,9 +125,9 @@
 		}
 		
 		#header {
-		   position: absolute;
+		   position: fixed;
 		   width:100%;
-		   height:0%;   /* Height of the footer */
+		   height:0rem;   /* Height of the footer */
 		   padding: 20px;
 		   background:#948584;
 		   justify-content: left;
@@ -161,9 +152,6 @@
 		.tabcontent {
 		  animation: fadeEffect 1s; /* Fading effect takes 1 second */
 		  padding: 20px;
-		  position: fixed;
-			top: 2.9%;
-			left:2.9%;
 			
 		}
 		
@@ -267,7 +255,7 @@
 		}
 		
 		#TopOfPageContainer {
-		position: relative;
+		position: fixed;
 		}
 		
 		#gameVersion{
@@ -284,7 +272,6 @@
 					
 		.visibleblock{
 			display: block;
-			position: static;
 			padding: 10px;
 		}
 		
@@ -320,12 +307,26 @@
 			height: 30px;
 			width: 68px;
 		}
+		
+		#foodprogressBar{
+			background-color: green;
+			color: black;
+			font-size: 1.5rem;
+			text-align: left;
+		}
 
-		#progress-bar {
+		.progressBar {
 			background: #000;
 			display: block;
 			height: 30px;
-			width: 0;
+			width: 37.2rem;
+		}
+		
+		.progressBarContainer {
+			background: #000;
+			display: block;
+			height: 30px;
+			width: 30.2rem;
 		}
 		
 		.MainInteractTitle {
@@ -338,3 +339,30 @@
 		.flex-child {
 		  flex: 1;
 		}
+		
+		.MainInteract{
+			position: fixed;
+			top: 9.4rem;
+			left:38.8rem;
+			
+			border-style: solid;
+			border-color: black;
+			border-width: thick;
+			text-align: center;
+			width: 41.8rem;
+			height: 40rem;
+		}
+		
+		#TimeStateButtonContainer{
+			display: inline-flex;
+			position: fixed;
+			top:0.2rem;
+			right:4rem;
+		}
+		
+		#Time{
+		position: fixed;
+		top: 0.7	rem;
+		right: 15rem;
+		}
+		
