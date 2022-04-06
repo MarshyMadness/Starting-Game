@@ -376,6 +376,7 @@
 		
 		#FoodProgressBar {
 		  width: 0;
+		  height: 2rem;
 		  background: #f78;
 		  text-align: center;
 		  overflow: hidden;
@@ -385,5 +386,9 @@
 		  background: orange;
 		  text-align: center;
 		  overflow: hidden;
-			height: 1rem;
+			height: 2rem;
+		}
+		
+			background-color:#ccc;
+		button.active{
 		}

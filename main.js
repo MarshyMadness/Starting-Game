@@ -1,4 +1,4 @@
-	var gameData = {
+var gameData = {
 		GameVersion: "v0.0.4",
 		foodAmount: 0,
 		foodPerClick: 1,
@@ -111,7 +111,6 @@
 		
 		$("#gatherFoodButton").click(function() {
 		FoodProgressBar();
-		MyMove();
 		});
 		
 		$("#cutWoodButton").click(function(){ cutWood(); });
@@ -151,9 +150,9 @@
 			}
 			*/
 			
-			var elems = document.querySelectorAll(".active");
+			var elems = document.querySelectorAll(".visibleblock");
 				[].forEach.call(elems, function(el) {
-				el.classList.remove("active");
+				el.classList.remove("visibleblock");
 				[].forEach.call(tabcontent, function(el) {
 				el.classList.add("Hidden");
 			});
@@ -163,22 +162,23 @@
 			$("#People").parent("div").show();
 			$('#People').addClass('visibleblock');
 			$('#Peoplebutton').addClass('active');
-			$('#Peoplebutton').removeClass('Hidden');
+			$('#People').removeClass('Hidden');
 		});
 		
 		$("#Buildingsbutton").click(function(){	
-				var elems = document.querySelectorAll(".active");
-					[].forEach.call(elems, function(el) {
-					el.classList.remove("active");
-					[].forEach.call(tabcontent, function(el) {
+				var elems = document.querySelectorAll(".visibleblock");
+					[].forEach.call(elems, function(el) {				
 					el.classList.add("Hidden");
 					});
+					[].forEach.call(elems, function(el) {
+					el.classList.remove("visibleblock");
+		
 					});
 				
 				$("#Buildings").parent("div").show();
 				$('#Buildings').addClass('visibleblock');
 				$('#Buildingsbutton').addClass('active');
-				$('#Buildingsbutton').removeClass('Hidden');
+				$('#Buildings').removeClass('Hidden');
 			
 		
 		}); 
@@ -399,7 +399,8 @@
 	loop.start();
 	
 	function FoodProgressBar() {
-		  var progressBar = $('#FoodProgressBar1'),
+		
+		  var progressBar = $('#FoodProgressBar'),
 			width = 0;
 
 		  progressBar.width(width);
@@ -409,29 +410,22 @@
 			width += 10;
 
 			progressBar.css('width', width + '%');
+		    document.getElementById("FoodProgressBar").innerHTML= width + "%";
 
 			if (width >= 100) {
 			  clearInterval(interval);
+			  hideProgressBar();
 			}
-		  }, 1000);
-
+		  }, 1000);	  
+			
+			showProgressBar();
 		}
 		
 		
-		function myMove() {
-  let id = null;
-  const elem = document.getElementById("FoodProgressBar");
-  let pos = 0;
-  clearInterval(id);
-  id = setInterval(frame, 5);
-  function frame() {
-    if (pos == 350) {
-      clearInterval(id);
-    } else {
-      pos++;
-      elem.style.top = pos + 'px';
-      elem.style.left = pos + 'px';
-    }
-  }
-} 
+	function hideProgressBar(){
+		$("#FoodProgressBar").css("display","none")
+		}
+	function showProgressBar(){
+		$("#FoodProgressBar").css("display","inline-block")
+	}
 
