@@ -199,7 +199,7 @@
 		}
 		
 		.tab button {
-			display: inline-block
+			display: inline-block;
 			background-color: grey;
 			display: inline-flex;
 			outline: none;
@@ -217,10 +217,17 @@
 		
 		}
 		
-		#Buildingsbutton{
+		#Gatherbutton{
 		margin-top: 0.6rem;
 		margin-bottom: 0.6rem;
 		margin-left: 0.6rem;
+		margin-right: 0.3rem;
+		}
+		
+		#Buildingsbutton{
+		margin-top: 0.6rem;
+		margin-bottom: 0.6rem;
+		margin-left: 0.3rem;
 		margin-right: 0.3rem;
 		}
 		
@@ -360,9 +367,26 @@
 			right:4rem;
 		}
 		
-		#Time{
-		position: fixed;
-		top: 0.7	rem;
-		right: 15rem;
+		#MenuIcon{
+			position:fixed;
+			right: 1rem;		
 		}
 		
+		#MenuDialog{
+			position: fixed;
+		}
+		
+		.GameStats{
+			
+		}
+		
+		#OptionsDialog{
+				background-color:light-grey;
+		}
+		
+		.TimeColor{
+			color:#2ebf55
+		}
+		
+		.GatherDialog{
+		}

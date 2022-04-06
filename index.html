@@ -2,9 +2,13 @@
 <html lang="en" dir="ltr">
 	<head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/3f6b4665af.js" crossorigin="anonymous"></script>
 	<script src="external/jquery/jquery.js"></script>
+	
 	<link rel="stylesheet" href="jquery-ui.css">
 	<link rel="stylesheet" href="jquery-ui.theme.min.css">
+	
+
 	
 	<script src="main.js"></script>
     <meta charset="utf-8">
@@ -27,9 +31,16 @@
 		<p class="Version" style="display: block">
 		<p id="gameVersion"> Version </p>
 		<div id="TimeStateButtonContainer">
-		<span id="Time">Time Elapsed: </span>
+		
 		<button class="TimeStateButton" id="start"> Play </button>
 		<button class="TimeStateButton" id="pause"> Pause </button>
+		<button id="MenuIcon" class="fa-solid fa-bars"></button>
+		
+		<div class="dialog" id="OptionsDialog">
+				<span class="GameStats" id="Time">Current Playtime: </span> <br>
+				<span class="GameStats" id="TimeElapsedTotal"> </span> 
+		
+		</div>
 		</div>
 	</div>
 
@@ -68,6 +79,7 @@
 
 	<div class="tabHolder" style="display: inline-block">
 		<div class="tab">
+			<button class="tablinks" id="Gatherbutton">Gather</button>
 			<button class="tablinks" id="Buildingsbutton">Buildings</button>
 			<button class="tablinks" id="Peoplebutton" >People</button>
 			<button class="tablinks" id="Researchbutton" style="display: none">Research</button>
@@ -86,38 +98,7 @@
 	   
 		
 		
-		<div class="flex-container">
-			<div class="resource-container">
-	
-				<button class="ResourceButtons flex-parent" id="gatherFoodButton">Gather Food</button>
-			
-				<button id="foodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button>
-			</div>
-			
-			<div class="progressBarContainer" id="foodprogressBarContainer">
-				<div class ="progressBar" id="foodprogressBar">
-				</div>
-			</div>
-			
-			<div class="resource-container">
-			
-				<button class="ResourceButtons" id="cutWoodButton">Cut Wood</button>
-			  
-				<button onclick="buywoodPerClick()" id="woodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button>
-			</div>
-			
-			<div class="resource-container">
-				<button id="mineCopperButton">Mine Copper</button>
-			  
-				<button onclick="buycopperPerClick()" id="copperperClickUpgrade" style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button>
-			</div>
-			
-			<div class="resource-container">
-				<button onclick="minebronze()" id="minebronzebutton" style="display: none;">Mine Bronze</button>
 
-				<button onclick="buybronzePerClick()" id="bronzeperClickUpgrade" style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button>
-			 </div>
-		</div> 
 	</div>
 
 	<div id="People" class="tabcontent MainInteractTitle Hidden">
@@ -141,14 +122,38 @@
 	</div>
 </div>
 
-	
-		<div id="footer">
-			<div class="QuickOptionButtons">
-				<button id ="SaveButton" class="OptionsQuick">Save</button>
-				<button onclick="load()" class="OptionsQuick">Load</button>
-				<button onclick="ClearSave()" class="OptionsQuick">Clear Save</button>
+<div class="dialog" id="GatherDialog" title="Gather">
+  		<div class="flex-container">
+			<div class="resource-container">
+				<button class="ResourceButtons flex-parent" id="gatherFoodButton">Gather Food</button>
+				<button id="foodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button>
 			</div>
+			
+			<div class="resource-container">
+				<button class="ResourceButtons" id="cutWoodButton">Cut Wood</button>
+				<button onclick="buywoodPerClick()" id="woodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button>
+			</div>
+			
+			<div class="resource-container">
+				<button id="mineCopperButton">Mine Copper</button>
+				<button onclick="buycopperPerClick()" id="copperperClickUpgrade" style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button>
+			</div>
+			
+			<div class="resource-container">
+				<button onclick="minebronze()" id="minebronzebutton" style="display: none;">Mine Bronze</button>
+
+				<button onclick="buybronzePerClick()" id="bronzeperClickUpgrade" style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button>
+			 </div>
+		</div> 
+</div>
+	
+	<div id="footer">
+		<div class="QuickOptionButtons">
+			<button id ="SaveButton" class="OptionsQuick">Save</button>
+			<button onclick="load()" class="OptionsQuick">Load</button>
+			<button onclick="ClearSave()" class="OptionsQuick">Clear Save</button>
 		</div>
+	</div>
 </body>
 
 </html>
