@@ -1,5 +1,3 @@
-
-	
 	var gameData = {
 		GameVersion: "v0.0.4",
 		foodAmount: 0,
@@ -21,14 +19,6 @@
 	var Time = gameData.TotalTime;
 
 	var SAVE_KEY = gameData;
-
-	/*$(function() {
-				$("#GatherFoodProgressBar").progressbar({
-					value: 90
-	  
-				});
-			});
-	*/
 
 	function FixBorder(){
 		//$("#Buildings").parent("div").show();
@@ -118,134 +108,12 @@
 			loop.pause();
 		});
 	
-		/*
-		$("#gatherFoodButton").click(function(){
-			let x=0;
-			
-			
-			while (x<=100){
-				$( "#GatherFoodprogress_bar" ).progressbar({
-					value: x
-				});
-				document.getElementById("gatherFoodButton").disabled = true;
-				x+= 1;
-			};
-			document.getElementById("gatherFoodButton").disabled = false;
-		*/
-			
-			
-			
-			
-			
-			
-			
-		/*
-			var progressBar = $('#foodprogressBar');
-			var elem = document.getElementById('foodprogressBar');
-			var positionInfo = elem.getBoundingClientRect();
-			var height = positionInfo.height;
-			var maxwidth = positionInfo.width;
-			var width = 0;
-			
-			$('#foodprogressBar').progressbar({value: 0});
-			
-			//progressBar.style.width = currentWidth + 'px';
-			
-
-			//progressBar.style.width(width);
-
-			var interval = window.setInterval(function() {
-			document.getElementById("gatherFoodButton").disabled = true;
-				//idth += 10;
-				var progressnum= $('#foodprogressBar').progressbar("option", "value");
-
-				progressBar.css('width', progressnum + '%');
-				if (width >= 100) {
-					clearInterval(interval);
-					$('#foodprogressBar').progressbar("option","value", 0);
-					width = $('#foodprogressBar').progressbar("option","value");
-					gatherFood(); 
-				} 
-				else{
-					//progress = parseInt(progressbar.getAttribute('#foodprogressBar'));
-					//progress = ((progress + 1) % 100);
-					$('#foodprogressBar').progressbar({value: $("#progressbar").progressbar("value")+10});
-					progressnum = $('#foodprogressBar').progressbar("option", "value");
-					$( "#foodprogressBar" ).progressbar( "option", "value", width+10 );
-					//width = $('#foodprogressBar').progressbar("option","value");
-					//width += 50;
-					
-					$( "#foodprogressBar" ).progressbar({
-					  change: function( event, ui ) {
-						  width = $('#foodprogressBar').progressbar("option","value");
-					  }
-					});
-					elem.style.width = width + '%'; 
-					elem.innerHTML = width * 1  + '%';
-					
-				}
-			}, 2100);
-			document.getElementById("gatherFoodButton").disabled = false;
-		*/
-			
-			
-			/*
-			var currValue = $( "#gatherFoodButton" ).data("value");
-			currValue = parseInt(currValue) ? parseInt(currValue) : 0;
-			if(currValue <= 100) {
-				$( "#gatherFoodButton" ).progressbar({
-				  value: currValue+1
-				}).data("value",currValue+1);
-				$("#gatherFoodButton").html("Gather Food " + (currValue+1)+"%");
-			}  
-			*/
-			
-			
-			/*
-			var progress = 0;
-
-			//change button to progress button, and add progress bar
-			$('#gatherFoodButton').addClass('progress').html('<span id="gatherFoodButton"></span>');
-
-			//update progress bar every 0.5 second
-			setInterval(function(){
-				$('#gatherFoodButton').width(progress);
-				progress++;
-				document.getElementsById('gatherFood').innerHTML = "Gather food " + progress + "%"
-			}, 10);
-			*/
-			
-			/*
-			  $( function() {
-				var progressbar = $( "#gatherFoodProgressBar" ),
-				  progressLabel = $( "#gatherFoodButtonLabel" );
-			 
-				progressbar.progressbar({
-				  value: false,
-				  change: function() {
-					progressLabel.text( progressbar.progressbar( "value" ) + "%" );
-				  },
-				  complete: function() {
-					progressLabel.text( "Complete!" );
-				  }
-				});
-			 
-				function progress() {
-				  var val = progressbar.progressbar( "value" ) || 0;
-			 
-				  progressbar.progressbar( "value", val + 2 );
-			 
-				  if ( val < 99 ) {
-					setTimeout( progress, 80 );
-				  }
-				  if (val == 100) {
-					  
-				  }
-				}
-				
-			  } );
-			  */
-					
+		
+		$("#gatherFoodButton").click(function() {
+		FoodProgressBar();
+		MyMove();
+		});
+		
 		$("#cutWoodButton").click(function(){ cutWood(); });
 		$("#mineCopperButton").click(function(){ minecopper(); });
 		
@@ -298,7 +166,7 @@
 			$('#Peoplebutton').removeClass('Hidden');
 		});
 		
-		$("#Buildingsbutton").click(function(){
+		$("#Buildingsbutton").click(function(){	
 				var elems = document.querySelectorAll(".active");
 					[].forEach.call(elems, function(el) {
 					el.classList.remove("active");
@@ -319,6 +187,7 @@
 			save(gameData);
 		});
 	});
+	
 	function gatherFood() {
 		  gameData.foodAmount += gameData.foodPerClick
 		  document.getElementById("foodGathered").innerHTML = gameData.foodAmount
@@ -528,3 +397,41 @@
 	};
 
 	loop.start();
+	
+	function FoodProgressBar() {
+		  var progressBar = $('#FoodProgressBar1'),
+			width = 0;
+
+		  progressBar.width(width);
+
+		  var interval = setInterval(function() {
+
+			width += 10;
+
+			progressBar.css('width', width + '%');
+
+			if (width >= 100) {
+			  clearInterval(interval);
+			}
+		  }, 1000);
+
+		}
+		
+		
+		function myMove() {
+  let id = null;
+  const elem = document.getElementById("FoodProgressBar");
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++;
+      elem.style.top = pos + 'px';
+      elem.style.left = pos + 'px';
+    }
+  }
+} 
+

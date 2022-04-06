@@ -291,17 +291,21 @@
 		display: inline-block;
 		}
 		
-		#GatherFoodProgress {
-			width: 100%;
+		#FoodProgressBar {
+		    width: 0;
+			background: #f78;
+			text-align: center;
+			overflow: hidden; 
+			height:10%;
+		}
+		#FoodProgressBarContainer{
 			background-color: grey;
+			color: black;
+			font-size: 1.5rem;
+			text-align: left;
+			width: 93%;
 		}
 
-		#GatherFoodBar {
-			width: 1%;
-			height: 30px;
-			background-color: green;
-		}
-		
 		.ui-widget {
 			background: gray;
 			border: 1px solid black;
@@ -313,27 +317,6 @@
 			padding: 0;
 			height: 30px;
 			width: 68px;
-		}
-		
-		#foodprogressBar{
-			background-color: green;
-			color: black;
-			font-size: 1.5rem;
-			text-align: left;
-		}
-
-		.progressBar {
-			background: #000;
-			display: block;
-			height: 30px;
-			width: 37.2rem;
-		}
-		
-		.progressBarContainer {
-			background: #000;
-			display: block;
-			height: 30px;
-			width: 30.2rem;
 		}
 		
 		.MainInteractTitle {
@@ -389,4 +372,18 @@
 		}
 		
 		.GatherDialog{
+		}
+		
+		#FoodProgressBar {
+		  width: 0;
+		  background: #f78;
+		  text-align: center;
+		  overflow: hidden;
+		}
+		#FoodProgressBarContainer {
+		  width: 37.6rem;
+		  background: orange;
+		  text-align: center;
+		  overflow: hidden;
+			height: 1rem;
 		}
