@@ -22,7 +22,7 @@
 	<style> 
 	</style>
   </head>
-<body onload="FixBorder()">
+<body>
 
 <div id="TopOfPageContainer">
 	<div id="header" style="display: block">
@@ -93,6 +93,10 @@
 		<span class = "close" style="display: inline-block">[x]</span>
 		<h3 style="display: inline-block">Buildings</h3>
 		
+		<br><br>
+		
+		<p id="TestTimer">LALAL</p>
+		
 	   
 		
 		
@@ -128,7 +132,7 @@
 			</div>
 			
 			<div id="FoodProgressBarContainer"> 
-				<div id="FoodProgressBar">progress bar</div>
+				<div id="FoodProgressBar"></div>
 			</div>
 			
 			
@@ -138,9 +142,17 @@
 				<button onclick="buywoodPerClick()" id="woodPerClickUpgrade" style="display: none;">Upgrade Hatchet (Currently Level 1) Cost: 10 wood</button>
 			</div>
 			
+			<div id="WoodProgressBarContainer"> 
+				<div id="WoodProgressBar"></div>
+			</div>
+			
 			<div class="resource-container">
 				<button id="mineCopperButton">Mine Copper</button>
 				<button onclick="buycopperPerClick()" id="copperperClickUpgrade" style="display: none;">Upgrade Copper Pickaxe (Currently Level 1) Cost: 10 copper</button>
+			</div>
+			
+			<div id="CopperProgressBarContainer"> 
+				<div id="CopperProgressBar"></div>
 			</div>
 			
 			<div class="resource-container">
@@ -148,14 +160,18 @@
 
 				<button onclick="buybronzePerClick()" id="bronzeperClickUpgrade" style="display: none;">Upgrade Bronze Pickaxe (Currently Level 1) Cost: 10 Bronze</button>
 			 </div>
+			 
+			<div id="BronzeProgressBarContainer"> 
+				<div id="BronzeProgressBar"></div>
+			</div>
 		</div> 
 </div>
 	
 	<div id="footer">
 		<div class="QuickOptionButtons">
 			<button id ="SaveButton" class="OptionsQuick">Save</button>
-			<button onclick="load()" class="OptionsQuick">Load</button>
-			<button onclick="ClearSave()" class="OptionsQuick">Clear Save</button>
+			<button id ="LoadButton" class="OptionsQuick">Load</button>
+			<button id ="ClearSaveButton" class="OptionsQuick">Clear Save</button>
 		</div>
 	</div>
 </body>

@@ -389,6 +389,51 @@
 			height: 2rem;
 		}
 		
+		#WoodProgressBar {
+		  width: 0;
+		  height: 2rem;
+		  background: #f78;
+		  text-align: center;
+		  overflow: hidden;
+		}
+		#WoodProgressBarContainer {
+		  width: 37.6rem;
+		  background: orange;
+		  text-align: center;
+		  overflow: hidden;
+			height: 2rem;
+		}
+		
+		#CopperProgressBar {
+		  width: 0;
+		  height: 2rem;
+		  background: #f78;
+		  text-align: center;
+		  overflow: hidden;
+		}
+		#CopperProgressBarContainer {
+		  width: 37.6rem;
+		  background: orange;
+		  text-align: center;
+		  overflow: hidden;
+			height: 2rem;
+		}
+		
+		#BronzeProgressBar {
+		  width: 0;
+		  height: 2rem;
+		  background: #f78;
+		  text-align: center;
+		  overflow: hidden;
+		}
+		#BronzeProgressBarContainer {
+		  width: 37.6rem;
+		  background: orange;
+		  text-align: center;
+		  overflow: hidden;
+			height: 2rem;
+		}
+		
 			background-color:#ccc;
 		button.active{
 		}

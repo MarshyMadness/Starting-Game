@@ -2,13 +2,13 @@ var gameData = {
 		GameVersion: "v0.0.4",
 		foodAmount: 0,
 		foodPerClick: 1,
-		foodPerClickCost: 50,
+		foodPerClickCost: 25,
 		wood: 0,
 		woodPerClick: 1,
-		woodPerClickCost: 50,
+		woodPerClickCost: 25,
 		copper: 0,
 		copperPerClick: 1,
-		copperPerClickCost: 50,
+		copperPerClickCost: 25,
 		copperPerClickUpgradeNum: 0,
 		bronze: 0,
 		bronzePerClick: 1,
@@ -16,9 +16,14 @@ var gameData = {
 		TotalTime: 0
 	};
 	
+	
+	window.addEventListener('load', (event) => {
+	  FixBorder();
+	});
+	
 	var Time = gameData.TotalTime;
 
-	var SAVE_KEY = gameData;
+	var SAVE_KEY = 'save';
 
 	function FixBorder(){
 		//$("#Buildings").parent("div").show();
@@ -109,12 +114,11 @@ var gameData = {
 		});
 	
 		
-		$("#gatherFoodButton").click(function() {
-		FoodProgressBar();
+		$("#gatherFoodButton").click(function() {FoodProgressBar();
 		});
 		
-		$("#cutWoodButton").click(function(){ cutWood(); });
-		$("#mineCopperButton").click(function(){ minecopper(); });
+		$("#cutWoodButton").click(function(){ WoodProgressBar(); });
+		$("#mineCopperButton").click(function(){ CopperProgressBar(); });
 		
 		$(".close").click(function(){
 			//onclick="this.parentElement.style.display='none'"
@@ -129,28 +133,9 @@ var gameData = {
 		});
 		
 		$("#Peoplebutton").click(function(){
-		//var index, tabcontent, tablinks;
-
-		  // Get all elements with class="tabcontent" and hide them
-		  //tabcontent = document.getElementsByClassName("tabcontent");
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  //tabcontent = Array.from(tabcontent);
-		 // console.log(tabcontent);
-		  //console.log(tabcontent.length);
-		  //tabcontent = $("#tabcontent").prop("classList");
-		  //tabcontent = tabcontent.classList;
-		  
-		  /*
-		  for (index = 0; index < tabcontent.length; index++) {
-			tabcontent[index].classList.add("Hidden"); //.display = "none	";
-			tabcontent[index].classList.remove("visibleblock");
-			tabcontent[index].classList.remove('active');
-			$(tabcontent[index]).addClass('Hidden');
-			$(tabcontent[index]).removeClass('Active');
-			}
-			*/
 			
 			var elems = document.querySelectorAll(".visibleblock");
+			var tabcontent = document.querySelectorAll(".tabcontent");
 				[].forEach.call(elems, function(el) {
 				el.classList.remove("visibleblock");
 				[].forEach.call(tabcontent, function(el) {
@@ -166,7 +151,9 @@ var gameData = {
 		});
 		
 		$("#Buildingsbutton").click(function(){	
+			initTimer(20);
 				var elems = document.querySelectorAll(".visibleblock");
+				var tabcontent = document.querySelectorAll(".tabcontent");
 					[].forEach.call(elems, function(el) {				
 					el.classList.add("Hidden");
 					});
@@ -186,12 +173,21 @@ var gameData = {
 		$("#SaveButton").click(function(){
 			save(gameData);
 		});
+		
+		$("#LoadButton").click(function(){
+			load(gameData);
+		});
+		
+		$("#ClearSaveButton").click(function(){
+			ClearSave(gameData);
+		});
+		
 	});
 	
 	function gatherFood() {
 		  gameData.foodAmount += gameData.foodPerClick
 		  document.getElementById("foodGathered").innerHTML = gameData.foodAmount
-		  document.getElementById("foodPerClickUpgrade").innerHTML = "Upgrade Hatchet (Currently Level " + gameData.foodPerClick + ") Cost: " + gameData.foodPerClickCost + " copper"
+		  document.getElementById("foodPerClickUpgrade").innerHTML = "Upgrade Gathering (Currently Level " + gameData.foodPerClick + ") Cost: " + gameData.foodPerClickCost + " wood"
 	}
 
 	function cutWood() {
@@ -225,63 +221,28 @@ var gameData = {
 		  }
 		}
 	})
-	 
-	var mainGameLoop = window.setInterval(function() {
-	  //minecopper(); cutWood(); gatherFood();
-		document.getElementById("foodGathered").innerHTML = gameData.foodAmount
-	  
-		document.getElementById("gameVersion").innerHTML = "Version " + gameData.GameVersion
-		//document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
-	  
-	  
-		if(gameData.foodAmount >= 50){
-		  document.getElementById("foodPerClickUpgrade").style.display="inline-block";
-		}
-	   if(gameData.wood >= 50){
-		  document.getElementById("woodPerClickUpgrade").style.display="inline-block";
-	  }
-	  
-	  if(gameData.copper >= 50){
-		  document.getElementById("copperperClickUpgrade").style.display="inline-block";
-	  }
-	  
-	  $( document ).ready(function(){
-	  if (gameData.copperPerClickUpgradeNum >= 2){
-			minebronze();
-			$('bronze').css('display', 'table-row');
-			document.getElementById("bronze").style.display="table-row";
-			document.getElementById("bronzeMined").style.display="table-cell";
-			document.getElementById("bronzeMinedPerSecond").style.display="table-cell";
-			document.getElementById("bronzeMinedPerSecond").innerHTML = gameData.bronzePerClick
-			document.getElementById("minebronzebutton").style.display="flex inline";
-	  }
-	  
-	  if(gameData.bronze >= 50){
-		  document.getElementById("bronzeperClickUpgrade").style.display="flex inline";
-	  }
-	  })
-	}, 1000)
 
 
 
 
-	var saveGameLoop = window.setInterval(function() {
-	  localStorage.setItem('copperMinerSave', JSON.stringify(gameData))
-	}, 15000)
+
+	//var saveGameLoop = window.setInterval(function() {
+	  //localStorage.setItem('copperMinerSave', JSON.stringify(gameData))
+	//}, 15000)
 
 	function save(gameData) {
 	   // let dec = decimalToString(game);
 		//let str = JSON.stringify(dec);
 		//localStorage.setItem("Factorygamesave", str);
 		//document.getElementById("Save").style.justifyContent = "center";
-		window.localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
+		localStorage.setItem(SAVE_KEY, JSON.stringify(gameData));
 	}
 
 	function load() {
 		//let str = localStorage.getItem("Factorygamesave");
 		//if (str == undefined || str == "undefined" || str == null) return;
 		//let sav = stringToDecimal(JSON.parse(str));
-		gameData = JSON.parse(window.localStorage.getItem(SAVE_KEY));
+		return gameData = JSON.parse(localStorage.getItem(SAVE_KEY));
 	}
 
 	function ClearSave() {
@@ -384,6 +345,46 @@ var gameData = {
 	  document.getElementById("Time").innerHTML = "Current Playtime: " + "<span class=\"TimeColor\">" + Math.round(t/1000)+" seconds</span>";
 	  gameData.TotalTime += dt;
 	  document.getElementById("TimeElapsedTotal").innerHTML = "Total Time Played: " + "<span class=\"TimeColor\">" + (Math.round(gameData.TotalTime/60000) + " minutes</span/>");
+	  
+	var UpdateGameLoop = window.setInterval(function() {
+	  //minecopper(); cutWood(); gatherFood();
+		document.getElementById("foodGathered").innerHTML = gameData.foodAmount
+		document.getElementById("woodCut").innerHTML = gameData.wood
+		document.getElementById("copperMined").innerHTML = gameData.copper
+		document.getElementById("bronzeMined").innerHTML = gameData.bronze
+	  
+		document.getElementById("gameVersion").innerHTML = "Version " + gameData.GameVersion
+		//document.getElementById("copperMinedPerSecond").innerHTML = gameData.copperPerClick
+	  
+	  
+		if(gameData.wood >= 25){
+		  document.getElementById("foodPerClickUpgrade").style.display="inline-block";
+		}
+	   if(gameData.copper >= 50){
+		  document.getElementById("woodPerClickUpgrade").style.display="inline-block";
+	  }
+	  
+	  if(gameData.bronze >= 50){
+		  document.getElementById("copperperClickUpgrade").style.display="inline-block";
+	  }
+	  
+	
+	  if (gameData.copperPerClickUpgradeNum >= 2){
+			minebronze();
+			$('bronze').css('display', 'table-row');
+			document.getElementById("bronze").style.display="table-row";
+			document.getElementById("bronzeMined").style.display="table-cell";
+			document.getElementById("bronzeMinedPerSecond").style.display="table-cell";
+			document.getElementById("bronzeMinedPerSecond").innerHTML = gameData.bronzePerClick
+			document.getElementById("minebronzebutton").style.display="flex inline";
+	  }
+	  
+	  if(gameData.bronze >= 50){
+		  document.getElementById("bronzeperClickUpgrade").style.display="flex inline";
+	  }
+	  
+	}, 1000)
+	
 	};
 	
 
@@ -398,7 +399,22 @@ var gameData = {
 
 	loop.start();
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	function FoodProgressBar() {
+		FoodshowProgressBar();
+		document.getElementById("gatherFoodButton").disabled = true; 
 		
 		  var progressBar = $('#FoodProgressBar'),
 			width = 0;
@@ -413,19 +429,137 @@ var gameData = {
 		    document.getElementById("FoodProgressBar").innerHTML= width + "%";
 
 			if (width >= 100) {
-			  clearInterval(interval);
-			  hideProgressBar();
+				clearInterval(interval);
+				FoodhideProgressBar();
+				gatherFood();
+				document.getElementById("gatherFoodButton").disabled = false; 
 			}
-		  }, 1000);	  
-			
-			showProgressBar();
+		  }, 200);	  
+		  
 		}
 		
 		
-	function hideProgressBar(){
+	function FoodhideProgressBar(){
 		$("#FoodProgressBar").css("display","none")
 		}
-	function showProgressBar(){
+	function FoodshowProgressBar(){
 		$("#FoodProgressBar").css("display","inline-block")
 	}
 
+	function WoodProgressBar() {
+		document.getElementById("cutWoodButton").disabled = true; 
+		WoodshowProgressBar();
+		
+		  var progressBar = $('#WoodProgressBar'),
+			width = 0;
+
+		  progressBar.width(width);
+
+		  var interval = setInterval(function() {
+
+			width += 10;
+
+			progressBar.css('width', width + '%');
+		    document.getElementById("WoodProgressBar").innerHTML= width + "%";
+
+			if (width >= 100) {
+			  clearInterval(interval);
+			  WoodhideProgressBar();
+			  cutWood();
+			  document.getElementById("cutWoodButton").disabled = false;
+			}
+		  }, 200);	  
+		  
+		}
+		
+		
+	function WoodhideProgressBar(){
+		$("#WoodProgressBar").css("display","none")
+		}
+	function WoodshowProgressBar(){
+		$("#WoodProgressBar").css("display","inline-block")
+	}
+
+		function CopperProgressBar() {
+		CoppershowProgressBar();
+	  document.getElementById("mineCopperButton").disabled = true;
+
+		
+		  var progressBar = $('#CopperProgressBar'),
+			width = 0;
+
+		  progressBar.width(width);
+
+		  var interval = setInterval(function() {
+
+			width += 10;
+
+			progressBar.css('width', width + '%');
+		    document.getElementById("CopperProgressBar").innerHTML= width + "%";
+
+			if (width >= 100) {
+			  clearInterval(interval);
+			  CopperhideProgressBar();
+			  minecopper();
+			  document.getElementById("mineCopperButton").disabled = false;
+			}
+		  }, 200);	  
+		  
+		}
+		
+		
+	function CopperhideProgressBar(){
+		$("#CopperProgressBar").css("display","none")
+		}
+	function CoppershowProgressBar(){
+		$("#CopperProgressBar").css("display","inline-block")
+	}
+
+	
+		function BronzeProgressBar() {
+		BronzeshowProgressBar();
+		document.getElementById("mineBronzeButton").disabled = true;
+
+		
+		  var progressBar = $('#BronzeProgressBar'),
+			width = 0;
+
+		  progressBar.width(width);
+
+		  var interval = setInterval(function() {
+
+			width += 10;
+
+			progressBar.css('width', width + '%');
+		    document.getElementById("BronzeProgressBar").innerHTML= width + "%";
+
+			if (width >= 100) {
+			  clearInterval(interval);
+			  BronzehideProgressBar();
+			 minebronze();
+				 document.getElementById("mineBronzeButton").disabled = false;
+			}
+		  }, 200);	  
+		  
+		}
+		
+		
+	function BronzehideProgressBar(){
+		$("#BrozeprogressBar").css("display","none")
+		}
+	function BronzeshowProgressBar(){
+		$("#BronzeProgressBar").css("display","inline-block")
+		}
+
+	function initTimer(periodInSeconds) {
+            var end = Date.now() + periodInSeconds * 1000;
+
+
+            var x = window.setInterval(function() {
+                var timeLeft = Math.floor((end - Date.now()) / 1000);
+
+                if(timeLeft < 0) { clearInterval(x); return; }
+
+                document.getElementById("TestTimer").innerHTML = ('00:' + (timeLeft < 10 ? '0' + timeLeft : timeLeft));
+            },200);
+        }
